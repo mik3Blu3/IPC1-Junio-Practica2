@@ -1,14 +1,15 @@
 package src;
-
+//clase pelicula
 public class pelicula {
     private int idPelicula;
     private String nombrePelicula;
     private int anioPelicula;
     private String categoriaPelicula;
     private boolean disponibilidadPelicula;
-
+    //constructor de peliculas
     public pelicula(int id, String nombre, int anio, String categoria, boolean disponible )
-    {
+    {   
+        //igualando atributos a parametros que seran recibidos 
         this.idPelicula = id;
         this.nombrePelicula = nombre;
         this.anioPelicula = anio;
