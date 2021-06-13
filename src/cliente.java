@@ -1,11 +1,13 @@
 package src;
-
+import java.util.*;
 public class cliente {
     //atributos de nuestro cliente
     private String nombreCliente;
     private int idCliente;
     private int telefonoCliente;
     private boolean peliculasEnPrestamo;
+    //scanner 
+    static Scanner entrada = new Scanner(System.in);
     //constructor de clientes
     public cliente(String nombre, int idC, int telC, boolean pelisPrestamo)
     {
@@ -54,5 +56,11 @@ public class cliente {
     public void setPeliculaPrestada(boolean estadoPeliculaPrestada)
     {
         peliculasEnPrestamo = estadoPeliculaPrestada;
+    }
+    //PERMITE VISUALIZAR LOS ATRIBUTOS DE MI OBJETO ALMACENADOS EN EL ARRAY 
+    @Override
+    public String toString()
+    {
+        return "NOMBRE DEL CLIENTE: "+nombreCliente+ " ID: "+idCliente+" TELEFOFONO: "+telefonoCliente+" PElICULAS PRESTADAS: "+peliculasEnPrestamo;
     }
 }

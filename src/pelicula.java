@@ -66,4 +66,10 @@ public class pelicula {
     {
         disponibilidadPelicula = dispo;
     }
+    //PERMITE VISUALIZAR LOS ATRIBUTOS DE MI OBJETO ALMACENADOS EN EL ARRAY 
+    @Override
+    public String toString()
+    {
+        return " ID: "+idPelicula+"NOMBRE DE LA PELICULA: "+nombrePelicula+" Año: "+anioPelicula+" Categoria: "+categoriaPelicula+ " Estado de disponibilidad: "+disponibilidadPelicula;
+    }
 }
