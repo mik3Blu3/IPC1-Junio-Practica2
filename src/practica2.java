@@ -1,4 +1,5 @@
 package src;
+
 import java.util.*;
 public class practica2 {
     //declarando nuestro scanner para ingreso de datos
@@ -8,5 +9,6 @@ public class practica2 {
     {
         //creando un nuevo blackbuster
         new blackbuster();
+
     }
 }

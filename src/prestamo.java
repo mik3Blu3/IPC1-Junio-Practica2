@@ -3,6 +3,8 @@ import java.util.*;
 public class prestamo {
 
     //atributos
+    private String nombreClienteSolicita;
+    private String nombrePeliSolicitadaP;
     private int idPeliculaPrestada;
     private int idClienteSolicitante;
     private int diasPrestamo;
@@ -11,12 +13,35 @@ public class prestamo {
     //SCANNER
     Scanner entrada = new Scanner(System.in);
     //constructor 
-    public prestamo(int idPeliP, int idClienS, int dias,int vecesPrestada)
+    public prestamo(String nombreClientePrestamo, String nombrePeliPrestamo,int idPeliP, int idClienS, int dias,int vecesPrestada)
+    {   
+        //permite igualar atributos a parametros que seran recibidos por el constructor
+        this.nombreClienteSolicita = nombreClientePrestamo;
+        this.nombrePeliSolicitadaP = nombrePeliPrestamo;
+        this.idPeliculaPrestada = idPeliP ;
+        this.idClienteSolicitante = idClienS;
+        this.diasPrestamo = dias;
+        this.cantidadVecesPrestada=vecesPrestada;
+    }
+    //permite devolver el nombre del cliente solicitante
+    public String getNombreClienteSolicitante()
     {
-        idPeliP = this.idPeliculaPrestada;
-        idClienS = this.idClienteSolicitante;
-        dias = this.diasPrestamo;
-        vecesPrestada = this.cantidadVecesPrestada;
+        return nombreClienteSolicita;
+    }
+    //permite recibir o modificar el nombre del cliente que solicita el prestamo
+    public void setNombreClienteSolicitante(String nombreClienteInsertar)
+    {
+        this.nombreClienteSolicita = nombreClienteInsertar;
+    }
+    //permite devolver el nombre de la pelicula que se solicita para prestamo
+    public String getNombrePeliculaSolicitada()
+    {
+        return nombrePeliSolicitadaP;
+    }
+    //permite almacenar el nombre de la pelicula o modificarlo 
+    public void setNombrePeliculaSolicitada(String nombrePeliculaInsertar)
+    {
+        this.nombrePeliSolicitadaP = nombrePeliculaInsertar;
     }
     //permite devolver los IDS de peliculas prestadas;
     public int getIdPeliPrestada()
@@ -62,7 +87,7 @@ public class prestamo {
     @Override
     public String toString()
     {
-        return " ID PELICULA PRESTADA: "+idPeliculaPrestada+" ID CLIENTE QUE ACTIVA PRESTAMO: "+idClienteSolicitante+" DIAS DE SOLICITUD DE PRESTAMO: "+diasPrestamo+" dias y con una cantidad de veces solicitada: "+cantidadVecesPrestada;
+        return " ID PELICULA PRESTADA: "+idPeliculaPrestada+" Con Nombre: "+nombrePeliSolicitadaP+" ID CLIENTE QUE ACTIVA PRESTAMO: "+idClienteSolicitante+" Con Nombre: "+nombreClienteSolicita+" DIAS DE SOLICITUD DE PRESTAMO: "+diasPrestamo+" dias y con una cantidad de veces solicitada: "+cantidadVecesPrestada;
     }
 
 }

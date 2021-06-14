@@ -1,4 +1,5 @@
 package src;
+import java.io.StreamCorruptedException;
 import java.util.*;
 //clase blackbuster
 public class blackbuster {
@@ -55,6 +56,7 @@ public class blackbuster {
                     compararIdPeliculas(pelis);
                 break;
                 case 5:
+                ordenarPelisAlfabeticamente();
                 break;
                 case 6:
                     crearClientes();
@@ -181,45 +183,44 @@ public class blackbuster {
 
     public void prestamosPelis()
     {   
-        System.out.println("Bienvenido al sistema de prestamos de peliculas dentro de nuestro actual inventario estan: (1 a "+cantidadDatos+") pelis disponibles");
-        mostrarPelis();
+        //creando nuestro arreglo para aceptar las transacciones
+        prestamosPelis = new prestamo[cantidadDatos];
         System.out.println("Desea realizar un prestamo??  ingrese (S/N) si-no");
         String opcionPrestamo = entrada.next();
         if(opcionPrestamo.equalsIgnoreCase("S"))
         {
-            //creando nuestro arreglo para aceptar las transacciones
-            prestamosPelis = new prestamo[cantidadDatos];
+            System.out.println("Bienvenido al sistema de prestamos de peliculas dentro de nuestro actual inventario estan: (1 a "+cantidadDatos+") pelis disponibles");
+            mostrarPelis();
             for(int i = 0; i<prestamosPelis.length ; i++)
             {
                 System.out.println("Ingrese el numero de pelicula que desea elegir: ");
                 int eleccionNumeroPeli = entrada.nextInt();
+                int auxNumeroPeli = pelis[eleccionNumeroPeli-1].getId();
                 System.out.println("La peli seleccionada fue: ");
                 System.out.println(pelis[eleccionNumeroPeli-1].getNombre());
-                //pelis[eleccionNumeroPeli-1].setDisponibilidad(0);
                 System.out.println("Durante cuantos dias desea reservarla?? ");
                 int eleccionDiasPrestamo =entrada.nextInt();
                 System.out.println("Los clientes con los que contamos son los siguientes: (1 a "+cantidadDatos+") clientes disponibles");
                 mostrarClientes();
                 System.out.println("Ingrese el numero de cliente al cual desea adjuntar el prestamo");
                 int eleccionNumeroCliente = entrada.nextInt();
+                int auxNumeroCliente = clientes[eleccionNumeroCliente-1].getIdCliente();
                 System.out.println("El cliente seleccionado es: ");
                 System.out.println(clientes[eleccionNumeroCliente-1].getNombreCLiente());
-                //clientes[eleccionNumeroCliente-1].setPeliculaPrestada(1);
                 //permite enviar a nuestro arreglo de prestamos la info de los clientes y pelicula enviada
                 int estadoClientePrestamo = clientes[eleccionNumeroCliente-1].getPeliculasPrestadas();
                 int estadoPeliPrestamo = pelis[eleccionNumeroPeli-1].getDisponibilidad();
                 if((estadoClientePrestamo != 1) && (estadoPeliPrestamo == 1))
                 {
+                    prestamosPelis[i] =new prestamo(auxNumeroPeli, auxNumeroCliente,eleccionDiasPrestamo,1);
                     pelis[eleccionNumeroPeli-1].setDisponibilidad(0);
                     clientes[eleccionNumeroCliente-1].setPeliculaPrestada(1);
                     System.out.println("TRANSACCION #"+(i+1)+" REALIZADA!");
-                } 
-                if(estadoClientePrestamo == 1 && estadoPeliPrestamo !=1)
+                }else if(estadoClientePrestamo == 1 && estadoPeliPrestamo !=1)
                 {
                     System.out.println("No se puede realizar la transaccion tiene un intento mas");
                     System.out.println("seleccione otro cliente ");
                 }
-                prestamosPelis[i] =new prestamo(pelis[eleccionNumeroPeli-1].getId(), clientes[eleccionNumeroCliente-1].getIdCliente(),eleccionDiasPrestamo,1);
             }
         }else{
             System.out.println("NO ACEPTO REALIZAR ALGUN PRESTAMO ");
@@ -232,5 +233,10 @@ public class blackbuster {
         {
             System.out.println(prestamosPelis[i]);
         }
+    }
+
+    public void ordenarPelisAlfabeticamente()
+    {
+    
     }
 }
