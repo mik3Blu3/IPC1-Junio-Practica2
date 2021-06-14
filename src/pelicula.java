@@ -5,9 +5,9 @@ public class pelicula {
     private String nombrePelicula;
     private int anioPelicula;
     private String categoriaPelicula;
-    private boolean disponibilidadPelicula;
+    private int disponibilidadPelicula;
     //constructor de peliculas
-    public pelicula(int id, String nombre, int anio, String categoria, boolean disponible )
+    public pelicula(int id, String nombre, int anio, String categoria, int disponible )
     {   
         //igualando atributos a parametros que seran recibidos 
         this.idPelicula = id;
@@ -57,12 +57,12 @@ public class pelicula {
         categoriaPelicula = categoria;
     }
     //metodo que devuelve la disponibilidad de la pelicula 
-    public boolean getDisponibilidad()
+    public int getDisponibilidad()
     {
         return disponibilidadPelicula;
     }
     //metodo que envia la disponibilidad para almacenarla o la modifica
-    public void setDisponibilidad(boolean dispo)
+    public void setDisponibilidad(int dispo)
     {
         disponibilidadPelicula = dispo;
     }

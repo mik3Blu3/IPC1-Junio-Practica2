@@ -5,11 +5,11 @@ public class cliente {
     private String nombreCliente;
     private int idCliente;
     private int telefonoCliente;
-    private boolean peliculasEnPrestamo;
+    private int peliculasEnPrestamo;
     //scanner 
     static Scanner entrada = new Scanner(System.in);
     //constructor de clientes
-    public cliente(String nombre, int idC, int telC, boolean pelisPrestamo)
+    public cliente(String nombre, int idC, int telC, int pelisPrestamo)
     {
         //dandole valor a los atributos asignandole los parametros que recibira el constructor
         this.nombreCliente = nombre;
@@ -48,12 +48,12 @@ public class cliente {
         telefonoCliente = telefC;
     }
     //metodo que devuelve el estado de los prestamos de peliculas
-    public boolean getPeliculasPrestadas()
+    public int getPeliculasPrestadas()
     {
         return peliculasEnPrestamo;
     }
     // metodo que permite almacenar el estado de prestamo de peliculas
-    public void setPeliculaPrestada(boolean estadoPeliculaPrestada)
+    public void setPeliculaPrestada(int estadoPeliculaPrestada)
     {
         peliculasEnPrestamo = estadoPeliculaPrestada;
     }

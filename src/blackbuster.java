@@ -2,12 +2,13 @@ package src;
 import java.util.*;
 //clase blackbuster
 public class blackbuster {
-    final int cantidadDatos = 3;
+    final int cantidadDatos = 2;
     //crando un Scanner que permita ingresar datos
     static Scanner entrada = new Scanner(System.in);
     //declarando arreglos
     public pelicula pelis[];
     public cliente clientes[];
+    public prestamo prestamosPelis[];
     //constructor
     public blackbuster()
     {
@@ -16,7 +17,7 @@ public class blackbuster {
         while(opcion != 9)
         {
             System.out.println("\n---------------BIENVENIDO AL SISTEMA DE MEMORABILIA----------------------\n");
-            System.out.println("Debera crear clientes y peliculas antes de realizar cualquier otra accion!!!");
+            System.out.println("Debera crear clientes y  despues peliculas antes de realizar cualquier otra accion!!!");
             System.out.println("______Las opciones son las siguientes_______");
             System.out.println("|1)*************PRESTAMOS PELIS*************|");
             System.out.println("|2)*************DEVOLUCION PELIS************|");
@@ -33,6 +34,10 @@ public class blackbuster {
             switch(opcionEscogida)
             {
                 case 1:
+                    prestamosPelis();
+                    System.out.println("Los prestamos actuales son: ");
+                    System.out.println("");
+                    mostrarPrestamosActivos();
                 break;
                 case 2:
                 break;
@@ -43,6 +48,7 @@ public class blackbuster {
                 break;
                 case 4:
                     crearPeliculas();
+                    System.out.println("");
                     System.out.println("Rectificaremos los datos ingresados con respecto al id:");
                     System.out.println("");
                     compararIdPeliculas(pelis);
@@ -51,6 +57,7 @@ public class blackbuster {
                 break;
                 case 6:
                     crearClientes();
+                    System.out.println("");
                     System.out.println("Rectificaremos los datos ingresados con respecto al id:");
                     System.out.println("");
                     compararIdClientes(clientes);
@@ -78,14 +85,15 @@ public class blackbuster {
         {
             System.out.println("Ingrese el ID de la pelicula: #"+(i+1));
             int idPeli = entrada.nextInt();
+            entrada.skip("\n");
             System.out.println("Ingrese el Nombre de la pelicula: #"+(i+1));
-            String nombrePeli = entrada.next();
+            String nombrePeli = entrada.nextLine();
             System.out.println("Ingrese el Año de creacion de la pelicula: #"+(i+1));
             int anioPeli = entrada.nextInt();
             System.out.println("Ingrese la categoria de la Pelicula: #"+(i+1));
             String categoriaPeli = entrada.next();
-            System.out.println("Ingrese el estado de disponibilidad de la pelicula: (true/false) ");
-            boolean disponibilidaPeli = entrada.nextBoolean();
+            System.out.println("Ingrese el estado de disponibilidad de la pelicula: (1 = si / 0 = no) ");
+            int disponibilidaPeli = entrada.nextInt();
             pelis[i]= new pelicula(idPeli, nombrePeli, anioPeli, categoriaPeli, disponibilidaPeli);        
         }
     }
@@ -96,14 +104,15 @@ public class blackbuster {
         clientes = new cliente[cantidadDatos];
         for(int i =0 ;  i< clientes.length ; i++)
         {
+            entrada.skip("\n");
             System.out.println("Ingrese nombre del cliente: #"+(i+1));
-            String nombCl = entrada.next();
+            String nombCl = entrada.nextLine();
             System.out.println("Ingrese el id del cliente: #"+(i+1));
             int idC = entrada.nextInt();
             System.out.println("Ingrese el telefolo del cliente: #"+(i+1));
             int telC = entrada.nextInt();
-            System.out.println("Ingrese el estado de prestamos del cliente (true/false): #"+(i+1));
-            boolean estP = entrada.nextBoolean();
+            System.out.println("Ingrese el estado de prestamos del cliente (1 = Si / 0 = no) : #"+(i+1));
+            int estP = entrada.nextInt();
             clientes[i]= new cliente(nombCl, idC, telC, estP);        
         }
     }
@@ -137,7 +146,7 @@ public class blackbuster {
         {
             if( i != 0)
             {
-                for(int n =0; n<arrePelisO.length; n++)
+                for(int n =0; n<i; n++)
                 {
                     if(arrePelisO[i].getId() == arrePelisO[n].getId())
                     {
@@ -149,7 +158,7 @@ public class blackbuster {
                 }
             }
         }
-        System.out.println("Todos los ID  de clientes  son correctos y son diferentes");
+        System.out.println("Todos los ID  de peliculas  son correctos y son diferentes");
         System.out.println("");
     }
     //permite mostrar los clientes
@@ -169,4 +178,65 @@ public class blackbuster {
         }
     }
 
+    public void prestamosPelis()
+    {   
+        //creando nuestro arreglo para aceptar las transacciones
+        prestamosPelis = new prestamo[cantidadDatos];
+        System.out.println("Bienvenido al sistema de prestamos de peliculas dentro de nuestro actual inventario estan: (1 a "+cantidadDatos+") pelis disponibles");
+        mostrarPelis();
+        System.out.println("Desea realizar un prestamo??  ingrese (S/N) si-no");
+        String opcionPrestamo = entrada.next();
+        if(opcionPrestamo.equalsIgnoreCase("S"))
+        {
+            for(int i = 0; i<prestamosPelis.length ; i++)
+            {
+                System.out.println("Ingrese el numero de pelicula que desea elegir: ");
+                int eleccionNumeroPeli = entrada.nextInt();
+                System.out.println("La peli seleccionada fue: ");
+                System.out.println(pelis[eleccionNumeroPeli-1].getNombre());
+                //pelis[eleccionNumeroPeli-1].setDisponibilidad(0);
+                System.out.println("Durante cuantos dias desea reservarla?? ");
+                int eleccionDiasPrestamo =entrada.nextInt();
+                System.out.println("Los clientes con los que contamos son los siguientes: (1 a "+cantidadDatos+") clientes disponibles");
+                mostrarClientes();
+                System.out.println("Ingrese el numero de cliente al cual desea adjuntar el prestamo");
+                int eleccionNumeroCliente = entrada.nextInt();
+                System.out.println("El cliente seleccionado es: ");
+                System.out.println(clientes[eleccionNumeroCliente-1].getNombreCLiente());
+                //clientes[eleccionNumeroCliente-1].setPeliculaPrestada(1);
+                //permite enviar a nuestro arreglo de prestamos la info de los clientes y pelicula enviada
+                int estadoClientePrestamo = clientes[eleccionNumeroCliente-1].getPeliculasPrestadas();
+                int estadoPeliPrestamo = pelis[eleccionNumeroPeli-1].getDisponibilidad();
+                if((estadoClientePrestamo != 1) && (estadoPeliPrestamo == 1))
+                {
+                    pelis[eleccionNumeroPeli-1].setDisponibilidad(0);
+                    clientes[eleccionNumeroCliente-1].setPeliculaPrestada(1);
+                    int idPeliAux = pelis[eleccionNumeroPeli-1].getId();
+                    int idClienteAux = clientes[eleccionNumeroCliente-1].getIdCliente();
+                    /*prestamosPelis[i].setIdPeliPrestada(idPeliAux);
+                    prestamosPelis[i].setIdClienteSolicitante(idClienteAux);
+                    prestamosPelis[i].setDiasDePrestamo(eleccionDiasPrestamo);
+                    prestamosPelis[i].setVecesSolicitada(1);*/
+                    prestamosPelis[i] =new prestamo(idPeliAux, idClienteAux,eleccionDiasPrestamo,1);
+                    System.out.println("TRANSACCION #"+(i+1)+" REALIZADA!");
+                } 
+                if(estadoClientePrestamo == 1 && estadoPeliPrestamo !=1)
+                {
+                    System.out.println("No se puede realizar la transaccion tiene un intento mas");
+                    System.out.println("seleccione otro cliente ");
+                }
+            }
+        }else{
+            System.out.println("NO ACEPTO REALIZAR ALGUN PRESTAMO ");
+        }
+
+    }
+
+    public void mostrarPrestamosActivos()
+    {
+        for(int i =0; i< prestamosPelis.length; i++)
+        {
+            System.out.println(prestamosPelis[i]);
+        }
+    }
 }
