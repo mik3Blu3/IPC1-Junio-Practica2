@@ -7,7 +7,7 @@ public class practica2 {
     //clase main
     public static void main(String args[])
     {
-        //creando un nuevo blackbuster
+        //creando un nuevo blackbuster ejecuta el programa
         new blackbuster();
 
     }
