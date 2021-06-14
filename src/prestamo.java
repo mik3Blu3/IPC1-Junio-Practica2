@@ -62,7 +62,7 @@ public class prestamo {
     @Override
     public String toString()
     {
-        return " ID PELICULA PRESTADA: "+idPeliculaPrestada+"ID CLIENTE QUE ACTIVA PRESTAMO: "+idClienteSolicitante+" DIAS DE SOLICITUD DE PRESTAMO: "+diasPrestamo+" dias y con una cantidad de veces solicitada: "+cantidadVecesPrestada;
+        return " ID PELICULA PRESTADA: "+idPeliculaPrestada+" ID CLIENTE QUE ACTIVA PRESTAMO: "+idClienteSolicitante+" DIAS DE SOLICITUD DE PRESTAMO: "+diasPrestamo+" dias y con una cantidad de veces solicitada: "+cantidadVecesPrestada;
     }
 
 }

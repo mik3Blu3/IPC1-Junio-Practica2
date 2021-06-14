@@ -35,6 +35,7 @@ public class blackbuster {
             {
                 case 1:
                     prestamosPelis();
+                    System.out.println("");
                     System.out.println("Los prestamos actuales son: ");
                     System.out.println("");
                     mostrarPrestamosActivos();
@@ -180,14 +181,14 @@ public class blackbuster {
 
     public void prestamosPelis()
     {   
-        //creando nuestro arreglo para aceptar las transacciones
-        prestamosPelis = new prestamo[cantidadDatos];
         System.out.println("Bienvenido al sistema de prestamos de peliculas dentro de nuestro actual inventario estan: (1 a "+cantidadDatos+") pelis disponibles");
         mostrarPelis();
         System.out.println("Desea realizar un prestamo??  ingrese (S/N) si-no");
         String opcionPrestamo = entrada.next();
         if(opcionPrestamo.equalsIgnoreCase("S"))
         {
+            //creando nuestro arreglo para aceptar las transacciones
+            prestamosPelis = new prestamo[cantidadDatos];
             for(int i = 0; i<prestamosPelis.length ; i++)
             {
                 System.out.println("Ingrese el numero de pelicula que desea elegir: ");
@@ -211,13 +212,6 @@ public class blackbuster {
                 {
                     pelis[eleccionNumeroPeli-1].setDisponibilidad(0);
                     clientes[eleccionNumeroCliente-1].setPeliculaPrestada(1);
-                    int idPeliAux = pelis[eleccionNumeroPeli-1].getId();
-                    int idClienteAux = clientes[eleccionNumeroCliente-1].getIdCliente();
-                    /*prestamosPelis[i].setIdPeliPrestada(idPeliAux);
-                    prestamosPelis[i].setIdClienteSolicitante(idClienteAux);
-                    prestamosPelis[i].setDiasDePrestamo(eleccionDiasPrestamo);
-                    prestamosPelis[i].setVecesSolicitada(1);*/
-                    prestamosPelis[i] =new prestamo(idPeliAux, idClienteAux,eleccionDiasPrestamo,1);
                     System.out.println("TRANSACCION #"+(i+1)+" REALIZADA!");
                 } 
                 if(estadoClientePrestamo == 1 && estadoPeliPrestamo !=1)
@@ -225,11 +219,11 @@ public class blackbuster {
                     System.out.println("No se puede realizar la transaccion tiene un intento mas");
                     System.out.println("seleccione otro cliente ");
                 }
+                prestamosPelis[i] =new prestamo(pelis[eleccionNumeroPeli-1].getId(), clientes[eleccionNumeroCliente-1].getIdCliente(),eleccionDiasPrestamo,1);
             }
         }else{
             System.out.println("NO ACEPTO REALIZAR ALGUN PRESTAMO ");
         }
-
     }
 
     public void mostrarPrestamosActivos()
