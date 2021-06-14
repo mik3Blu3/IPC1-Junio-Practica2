@@ -2,7 +2,8 @@ package src;
 import java.util.*;
 //clase blackbuster
 public class blackbuster {
-    final int cantidadDatos = 2;
+    //permite cambiar la cantidad de clientes maxima y de peliculas 
+    final int cantidadDatos = 30;
     //crando un Scanner que permita ingresar datos
     static Scanner entrada = new Scanner(System.in);
     //declarando arreglos
