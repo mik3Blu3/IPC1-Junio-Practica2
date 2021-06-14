@@ -181,7 +181,7 @@ public class blackbuster {
             System.out.println(pelis[i]);
         }
     }
-
+    //metodo que permite realizar los prestamos de las peliculas 
     public void prestamosPelis()
     {   
         //creando nuestro arreglo para aceptar las transacciones
