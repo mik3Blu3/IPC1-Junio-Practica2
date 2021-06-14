@@ -2,7 +2,7 @@ package src;
 import java.util.*;
 //clase blackbuster
 public class blackbuster {
-    final int cantidadDatos = 30;
+    final int cantidadDatos = 3;
     //crando un Scanner que permita ingresar datos
     static Scanner entrada = new Scanner(System.in);
     //declarando arreglos
@@ -37,15 +37,28 @@ public class blackbuster {
                 case 2:
                 break;
                 case 3:
+                    System.out.println("A continuacion toda la info de las peliculas actuales:");
+                    System.out.println("");
+                    mostrarPelis();
                 break;
                 case 4:
+                    crearPeliculas();
+                    System.out.println("Rectificaremos los datos ingresados con respecto al id:");
+                    System.out.println("");
+                    compararIdPeliculas(pelis);
                 break;
                 case 5:
                 break;
                 case 6:
-                        crearClientes();
+                    crearClientes();
+                    System.out.println("Rectificaremos los datos ingresados con respecto al id:");
+                    System.out.println("");
+                    compararIdClientes(clientes);
                 break;
                 case 7:
+                    System.out.println(" A continuacion toda la info de los clientes actuales: ");
+                    System.out.println("");
+                    mostrarClientes();
                 break;
                 case 8:
                 break;
@@ -66,12 +79,12 @@ public class blackbuster {
             System.out.println("Ingrese el ID de la pelicula: #"+(i+1));
             int idPeli = entrada.nextInt();
             System.out.println("Ingrese el Nombre de la pelicula: #"+(i+1));
-            String nombrePeli = entrada.nextLine();
+            String nombrePeli = entrada.next();
             System.out.println("Ingrese el Año de creacion de la pelicula: #"+(i+1));
             int anioPeli = entrada.nextInt();
             System.out.println("Ingrese la categoria de la Pelicula: #"+(i+1));
-            String categoriaPeli = entrada.nextLine();
-            System.out.println("Ingrese el estado de disponibilidad de la pelicula: ");
+            String categoriaPeli = entrada.next();
+            System.out.println("Ingrese el estado de disponibilidad de la pelicula: (true/false) ");
             boolean disponibilidaPeli = entrada.nextBoolean();
             pelis[i]= new pelicula(idPeli, nombrePeli, anioPeli, categoriaPeli, disponibilidaPeli);        
         }
@@ -84,31 +97,76 @@ public class blackbuster {
         for(int i =0 ;  i< clientes.length ; i++)
         {
             System.out.println("Ingrese nombre del cliente: #"+(i+1));
-            String nombCl = entrada.nextLine();
+            String nombCl = entrada.next();
             System.out.println("Ingrese el id del cliente: #"+(i+1));
             int idC = entrada.nextInt();
             System.out.println("Ingrese el telefolo del cliente: #"+(i+1));
             int telC = entrada.nextInt();
-            System.out.println("Ingrese el estado de prestamos del cliente: #"+(i+1));
+            System.out.println("Ingrese el estado de prestamos del cliente (true/false): #"+(i+1));
             boolean estP = entrada.nextBoolean();
             clientes[i]= new cliente(nombCl, idC, telC, estP);        
         }
     }
-    public void compararClientes(cliente[] arreClienteO)
+    //metodo que permite comparar IDs de clientes
+    public void compararIdClientes(cliente[] arreClienteO)
     {
-        for(int i = 0 ; i<arreClienteO.length ; i++)
+        for(int i = 0 ; i<arreClienteO.length; i++)
         {
-            if(arreClienteO[i].getIdCliente() == arreClienteO[i+1].getIdCliente())
+            if(i !=0)
             {
-                System.out.println("EL ID del cliente en la posicion: "+(i+1)+" con nombre :"+arreClienteO[i].getNombreCLiente()+" Es el mismo que el que esta en la posicion "+(i+2)+" y nombre: "+arreClienteO[i+1].getNombreCLiente());
-                System.out.println("Porfavor edite el ID del segundo cliente");
-                System.out.println("Ingrese el nuevo ID del cliente");
-                int idAux = entrada.nextInt();
-                arreClienteO[i+1].setIdCliente(idAux);
-            }else
-            {
-                System.out.println("Todos los ID  de clientes  son correctos y son diferentes");
+                for(int n =0; n<i; n++)
+                {
+                    if(((arreClienteO[i].getIdCliente() == arreClienteO[n].getIdCliente())))
+                    {
+                        System.out.println("EL ID del cliente en la posicion: "+(i)+" con nombre :"+arreClienteO[i-1].getNombreCLiente()+" Es el mismo que el que esta en la posicion "+(i+1)+" y nombre: "+arreClienteO[i].getNombreCLiente());
+                        System.out.println("Porfavor edite el ID del segundo cliente");
+                        System.out.println("Ingrese el nuevo ID del cliente");
+                        int idAux = entrada.nextInt();
+                        arreClienteO[n].setIdCliente(idAux);
+                    } 
+                }
             }
         }
+        System.out.println("Todos los ID  de clientes  son correctos y son diferentes");
+        System.out.println("");
     }
+    //permite comparar los IDs de las peliculas y editar la segunda repetida
+    public void compararIdPeliculas(pelicula[] arrePelisO)
+    {
+        for (int i =0; i<arrePelisO.length; i++)
+        {
+            if( i != 0)
+            {
+                for(int n =0; n<arrePelisO.length; n++)
+                {
+                    if(arrePelisO[i].getId() == arrePelisO[n].getId())
+                    {
+                        System.out.println("El ID de la pelicula con nombre: "+arrePelisO[i-1].getNombre()+" es el mismo con la pelicula que lleva nombre: "+arrePelisO[i].getNombre());
+                        System.out.println("Porfavor edite el ID de la segunda Pelicula: ");
+                        int idAux = entrada.nextInt();
+                        arrePelisO[n].setId(idAux);
+                    }
+                }
+            }
+        }
+        System.out.println("Todos los ID  de clientes  son correctos y son diferentes");
+        System.out.println("");
+    }
+    //permite mostrar los clientes
+    public void mostrarClientes()
+    {
+        for(int i =0 ;  i<clientes.length; i++)
+        {
+            System.out.println(clientes[i]);
+        }
+    }
+    //permite mostrar las peliculas
+    public void mostrarPelis()
+    {
+        for(int i =0; i<pelis.length; i++)
+        {
+            System.out.println(pelis[i]);
+        }
+    }
+
 }

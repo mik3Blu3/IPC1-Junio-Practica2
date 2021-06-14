@@ -70,6 +70,6 @@ public class pelicula {
     @Override
     public String toString()
     {
-        return " ID: "+idPelicula+"NOMBRE DE LA PELICULA: "+nombrePelicula+" Año: "+anioPelicula+" Categoria: "+categoriaPelicula+ " Estado de disponibilidad: "+disponibilidadPelicula;
+        return " ID: "+idPelicula+" NOMBRE DE LA PELICULA: "+nombrePelicula+" Año: "+anioPelicula+" Categoria: "+categoriaPelicula+ " Estado de disponibilidad: "+disponibilidadPelicula;
     }
 }
